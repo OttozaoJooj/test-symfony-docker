@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Simple</title>
+</head>
+<body>
+    <h1>APP Simples</h1>
+    <form action="POST">
+        <input type="text" name="nome">
+        <button type="submit">Enviar</button>
+    </form>
+    <div class="output"></div>
+
+    <script>
+
+        window.addEventListener('load', () =>{
+            fetch('http://localhost/api/users').then(response => response.json()).then(data => {
+                data.forEach(datas => {
+                    
+                    document.querySelector('.output').innerHTML += `==== <p>${datas.id}</p> <p>${datas.name}</p> <p>${datas.age}</p> ===`
+                });
+                
+            })
+            
+        })
+
+        document.querySelector('button').addEventListener('click', (e) =>{
+            e.preventDefault();
+
+            
+            let formdata = new FormData();
+
+            formdata.append('nome', document.querySelector('input').value);
+
+
+            fetch('http://localhost/post', {
+                method: 'POST',
+                body: formdata
+                
+            }).then(response => {
+                if(response.status === 200){
+                    console.log('post efetuado');
+                    location.reload();
+                }
+            })
+        })
+    </script>
+</body>
+</html>
