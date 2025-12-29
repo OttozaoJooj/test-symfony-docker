@@ -7,8 +7,12 @@
 </head>
 <body>
     <h1>APP Simples</h1>
-    <form action="POST">
-        <input type="text" name="nome">
+    <form>
+        <input type="text" name="name" class="name">
+        <input type="number" name="age" class="age">
+        <input type="file" name="file" class="file">
+
+        
         <button type="submit">Enviar</button>
     </form>
     <div class="output"></div>
@@ -32,19 +36,19 @@
             
             let formdata = new FormData();
 
-            formdata.append('nome', document.querySelector('input').value);
+            formdata.append('name', document.querySelector('.name').value);
+            formdata.append('age', document.querySelector('.age').value);
+            formdata.append('file', document.querySelector('.file').files[0]);
 
-
-            fetch('http://localhost/post', {
+            
+            
+            
+            fetch('http://localhost/api/user', {
                 method: 'POST',
                 body: formdata
                 
-            }).then(response => {
-                if(response.status === 200){
-                    console.log('post efetuado');
-                    location.reload();
-                }
-            })
+            }).then(response => response.json()).then(data => console.log(data))
+            
         })
     </script>
 </body>

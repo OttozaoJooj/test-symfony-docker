@@ -20,6 +20,9 @@ class Users
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $age = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $file_path = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class Users
     public function setAge(int $age): static
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getFilePath(): ?string
+    {
+        return $this->file_path;
+    }
+
+    public function setFilePath(?string $file_path): static
+    {
+        $this->file_path = $file_path;
 
         return $this;
     }
