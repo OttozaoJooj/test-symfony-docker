@@ -15,6 +15,7 @@ if($typeFolder === 'vehicles'){
     
 }
 
+
 $fileNamePath = __DIR__.'/../data/'.$typeFolder.'/'.$folderName.'/'.$fileName;
 
 
