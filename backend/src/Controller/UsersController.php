@@ -33,23 +33,28 @@ final class UsersController extends AbstractController
         $user = new Users();
         $user->setName($request->request->get('name'));
         $user->setAge($request->request->get('age'));
+
+        $idObject = $request->request->get('idObject');
         
         $fileUploded = $request->files->get('file');
- 
-        
-        $fileUploded->move('./', 'thedn.png');
+
+        $fileName = 'file.'.$fileUploded->guessExtension();
+                
+        $fileUploded->move('./', $fileName);
 
         $response = $client->request('POST', 'http://container-test-archive/code/uploadFile.php', [
-            'body' => ['vehicles' => fopen('thedn.png', 'r'), 'idUser' => '1212']
+            'body' => ['checklist' => fopen($fileName, 'r'), 'idObject' => $idObject]
         ]);
 
-                
+        $idFile = $response->getContent();
+                        
         /*
         $manager->persist($user);
         
         $manager->flush();
+        $response->getContent()
 */
-        return $this->json($response->getContent());
+        
 
     }
 }

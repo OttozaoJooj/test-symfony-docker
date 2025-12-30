@@ -10,11 +10,13 @@
     <form>
         <input type="text" name="name" class="name">
         <input type="number" name="age" class="age">
+        <input type="hidden" name="idObject" class="id-object" value="32">
         <input type="file" name="file" class="file">
 
         
         <button type="submit">Enviar</button>
     </form>
+    <a href="http://localhost:3001/code/getFile.php" download>Download</a>
     <div class="output"></div>
 
     <script>
@@ -38,6 +40,7 @@
 
             formdata.append('name', document.querySelector('.name').value);
             formdata.append('age', document.querySelector('.age').value);
+            formdata.append('idObject', document.querySelector('.id-object').value);
             formdata.append('file', document.querySelector('.file').files[0]);
 
             
